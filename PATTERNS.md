@@ -172,3 +172,28 @@ classDiagram
     BildirimYoneticisi --> BildirimFabrikasi : kullanır
     BildirimYoneticisi --> AyarYoneticisi : kullanır
 ```
+
+
+
+
+## Faz 2 Structural Örüntüler
+
+### 1. Decorator
+**Nerede uygulandı:** `src/bildirim/dekoratorler.py`
+**Neden seçildi:** OCP'yi bozmadan mevcut bildirim sınıflarına runtime'da "tekrar deneme" ve "maskeleme" gibi yeni yetenekler kazandırmak için.
+
+### 2. Adapter
+**Nerede uygulandı:** `src/bildirim/adaptorler.py`
+**Neden seçildi:** Mevcut sistemimizin temiz bir arayüzü varken, dışarıdan aldığımız 3. parti SMS servisinin metodları tamamen farklıydı. Adaptör yazarak uyumsuzluğu giderdik.
+
+
+
+## Faz 3 Behavioral Örüntüler
+
+### 1. Strategy
+**Nerede uygulandı:** `src/bildirim/stratejiler.py`
+**Neden seçildi:** Gönderim şekillerini (anında, gecikmeli vs.) sınıftan bağımsız hale getirmek için. Açık/Kapalı Prensibini (OCP) tam olarak sağlar; yeni bir strateji eklemek için mevcut kodu değiştirmek gerekmez.
+
+### 2. Observer
+**Nerede uygulandı:** `src/bildirim/gozlemciler.py`
+**Neden seçildi:** Bildirim gönderildikten sonra yapılacak ekstra işlemleri (loglama, analitik) ana akıştan ayırmak için. Sisteme yeni gözlemciler ekleyerek genişletilebilirliği artırır.

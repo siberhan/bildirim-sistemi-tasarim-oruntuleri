@@ -17,7 +17,7 @@ from __future__ import annotations
 
 from typing import Dict, Type
 
-from .bildirimler import (
+from bildirimler import (
     Bildirim,
     EmailBildirimi,
     PushBildirimi,
@@ -43,9 +43,7 @@ class BildirimFabrikasi:
     def kaydet(cls, tip_adi: str, sinif: Type[Bildirim]) -> None:
         """Yeni bir bildirim tipini fabrikaya kaydeder."""
         if not issubclass(sinif, Bildirim):
-            raise TypeError(
-                f"{sinif.__name__} Bildirim sınıfından türetilmelidir."
-            )
+            raise TypeError(f"{sinif.__name__} Bildirim sınıfından türetilmelidir.")
         cls._kayit[tip_adi.lower()] = sinif
 
     @classmethod

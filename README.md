@@ -1,13 +1,21 @@
-# Bildirim Sistemi — Tasarım Örüntüleri Ödevi
+# Bildirim Sistemi Tasarım Örüntüleri Ödevi
 
-**Seçilen Konu:** A — Bildirim Sistemi
+**Seçilen Konu:** A - Bildirim Sistemi
 
-**Konu Gerekçesi:** Bildirim sistemi günlük hayatta sık karşılaştığım bir
-yapı olduğu için problemi sezgisel olarak anlayabiliyorum. Ayrıca farklı
-bildirim tiplerinin (e-posta, SMS, push) ortak bir arayüze sahip olması
-ve sisteme zamanla yeni davranışlar (yeniden deneme, loglama, vb.)
-eklenmesi gerekmesi, tasarım örüntülerinin doğal olarak uygulanabileceği
-bir alan yaratıyor.
+## Proje Hakkında
+Bu proje, başlangıçta if-else zincirlerine sahip ("God Class") bir bildirim sisteminin tasarım örüntüleri kullanılarak nasıl temiz, genişletilebilir ve esnek bir yapıya dönüştürüldüğünü gösterir.
 
-## Durum
-Faz 0 hazırlığı sürüyor.
+## Kullanılan Tasarım Örüntüleri
+1. **Factory Method (Creational):** Bildirim nesnelerinin yaratılışını soyutlar ve OCP'ye uygun bir kayıt (registry) mekanizması sunar.
+2. **Singleton (Creational):** Uygulama yapılandırmasını (config) tek bir merkezden yönetir.
+3. **Decorator (Structural):** Bildirimlere sonradan "Tekrar Deneme" ve "Maskeleme" özellikleri ekler.
+4. **Adapter (Structural):** Uyumsuz bir harici SMS API'sini sistemin arayüzüne bağlar.
+5. **Strategy (Behavioral):** Bildirimlerin gönderim taktiklerini (Anında, Gecikmeli) runtime'da değiştirilebilir hale getirir.
+6. **Observer (Behavioral):** Bildirim sonuçlarını dinleyen loglama ve analitik gibi yapıları ana akıştan ayırır.
+
+## Mimari Diyagram
+*UML diyagramları ve örüntü detayları `PATTERNS.md` dosyasında yer almaktadır.*
+
+## Nasıl Çalıştırılır
+```bash
+python -m src.bildirim.bildirim_yoneticisi
