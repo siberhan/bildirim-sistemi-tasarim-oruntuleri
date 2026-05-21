@@ -1,21 +1,23 @@
 from abc import ABC, abstractmethod
-import time
-from bildirimler import Bildirim, BildirimSonucu
 
-class GonderimStratejisi(ABC):
+from bildirimler import BildirimSonucu
+
+
+class Gozlemci(ABC):
     @abstractmethod
-    def uygula(self, bildirim: Bildirim) -> BildirimSonucu:
+    def guncelle(self, sonuc: BildirimSonucu) -> None:
         pass
 
-class AnindaGonderim(GonderimStratejisi):
-    def uygula(self, bildirim: Bildirim) -> BildirimSonucu:
-        return bildirim.gonder()
 
-class GecikmeliGonderim(GonderimStratejisi):
-    def __init__(self, gecikme_sn: int = 1):
-        self.gecikme_sn = gecikme_sn
+class LogGozlemcisi(Gozlemci):
+    def guncelle(self, sonuc: BildirimSonucu) -> None:
+        durum = "BAŞARILI" if sonuc.basarili else "BAŞARISIZ"
+        print(
+            f"[GÖZLEMCİ - LOG] {durum} | Tip: {sonuc.bildirim_tipi} | Alıcı: {sonuc.alici}"
+        )
 
-    def uygula(self, bildirim: Bildirim) -> BildirimSonucu:
-        print(f"[STRATEJİ] {self.gecikme_sn} saniye gecikme uygulanıyor...")
-        time.sleep(self.gecikme_sn)
-        return bildirim.gonder()
+
+class AnalitikGozlemcisi(Gozlemci):
+    def guncelle(self, sonuc: BildirimSonucu) -> None:
+        if sonuc.basarili:
+            print(f"[GÖZLEMCİ - ANALİTİK] Metrik arttırıldı: {sonuc.bildirim_tipi}")
